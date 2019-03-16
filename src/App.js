@@ -39,11 +39,12 @@ const Book = ({ book, onUpdateBook }) => {
   );
 };
 
-const BookShelf = (props) => {
-  let books = props.shelf ? props.books.filter((book) => book.shelf === props.shelf) : props.books;
+const BookShelf = ({ shelf, books, onUpdateBook }) => {
+  let bookList = shelf ? books.filter((book) => book.shelf === shelf) : books;
+
   return (
-    books &&
-    books.map((book) => <Book key={book.id} book={book} onUpdateBook={props.onUpdateBook} />)
+    bookList &&
+    bookList.map((book) => <Book key={book.id} book={book} onUpdateBook={onUpdateBook} />)
   );
 };
 
@@ -61,7 +62,9 @@ class BooksApp extends React.Component {
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then((res) => {
       let newBooks = this.state.books.filter((a) => a.id !== book.id);
+      book['shelf'] = shelf;
       newBooks.push(book);
+
       this.setState({
         books : newBooks
       });
