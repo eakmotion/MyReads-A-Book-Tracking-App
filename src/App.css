@@ -196,3 +196,15 @@ button:active {
   text-align: center;
   font-size: 0.8em;
 }
+
+/* footer */
+
+#footer {
+  background: #60ac5d;
+  color: white;
+  display: block;
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+}
